@@ -1,13 +1,11 @@
 package ch.fhnw.ivis.javaFX.rgbMixer;
 
+import javafx.beans.property.Property;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
-/**
- * Created by Iris Cipriano.
- */
 public class RgbUI extends GridPane {
 
     private Slider redSlider;
@@ -18,12 +16,13 @@ public class RgbUI extends GridPane {
     private Label greenLabel;
     private Label blueLabel;
 
-    private Rectangle colorGround;
+    private Rectangle colorRectangle;
 
-    // todo: Instanz von PM
+    private RgbPM pm;
 
+    // Constructor
     public RgbUI(RgbPM pm){
-        //this.pm = pm;
+        this.pm = pm;
         initializeControls();
         layoutControls();
         addEventHandlers();
@@ -32,15 +31,15 @@ public class RgbUI extends GridPane {
     }
 
     private void initializeControls(){
-        redSlider     = new Slider(0.00, 255.0, 0);
-        greenSlider   = new Slider(0.00, 255.0, 0);
-        blueSlider    = new Slider(0.00, 255.0, 0);
+        redSlider       = new Slider(0.00, 255.0, 0);
+        greenSlider     = new Slider(0.00, 255.0, 0);
+        blueSlider      = new Slider(0.00, 255.0, 0);
 
-        redLabel = new Label();
-        greenLabel = new Label();
-        blueLabel = new Label();
+        redLabel        = new Label();
+        greenLabel      = new Label();
+        blueLabel       = new Label();
 
-        colorGround = new Rectangle();
+        colorRectangle  = new Rectangle();
     }
 
     private void layoutControls(){
@@ -48,7 +47,7 @@ public class RgbUI extends GridPane {
         addRow(1, greenLabel, greenSlider);
         addRow(2, blueLabel, blueSlider);
 
-        add(colorGround,0, 3, 2, 1);
+        add(colorRectangle,0, 3, 2, 1);
     }
 
     private void addEventHandlers(){
@@ -57,8 +56,19 @@ public class RgbUI extends GridPane {
     private void addValueChangedListeners(){
 
     }
-    private void addBindings(){
 
+    // Stand des Sliders synchron zu rot, grün und blau
+    private void addBindings(){
+        redSlider.valueProperty().bindBidirectional(pm.redProperty());
+        greenSlider.valueProperty().bindBidirectional(pm.greenProperty());
+        blueSlider.valueProperty().bindBidirectional(pm.blueProperty());
+
+        //textProperty fordert String, redProperty ist Integer, darum der Cast!
+        redLabel.textProperty().bind(pm.redProperty().asString());
+        greenLabel.textProperty().bind(pm.greenProperty().asString());
+        blueLabel.textProperty().bind(pm.blueProperty().asString());
+
+        colorRectangle.fillProperty().bind(pm.colorProperty());
     }
 
 

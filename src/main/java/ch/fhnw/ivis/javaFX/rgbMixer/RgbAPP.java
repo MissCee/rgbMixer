@@ -1,9 +1,26 @@
 package ch.fhnw.ivis.javaFX.rgbMixer;
 
-/**
- * Created by Iris Cipriano.
- */
-public class RgbAPP {
-    // todo main schreiben
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+public class RgbAPP extends Application{
+
+    // Stage enthält die Scene, Scene enthält Parent, Parent enthält Presentation Model
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        RgbPM pm = new RgbPM();
+        Parent rootPanel = new RgbUI(pm);
+        Scene scene = new Scene(rootPanel);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
