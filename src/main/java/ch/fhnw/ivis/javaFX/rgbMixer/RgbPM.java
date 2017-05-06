@@ -1,16 +1,14 @@
 package ch.fhnw.ivis.javaFX.rgbMixer;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.scene.paint.Color;
 
 public class RgbPM {
 
-    private IntegerProperty red = new SimpleIntegerProperty(100);
-    private IntegerProperty green = new SimpleIntegerProperty(100);
+    private StringProperty title = new SimpleStringProperty("RGB Mixer");
+    private IntegerProperty red = new SimpleIntegerProperty(185);
+    private IntegerProperty green = new SimpleIntegerProperty(74);
     private IntegerProperty blue = new SimpleIntegerProperty(100);
 
     // Mischfarbe (!alles was kein primitiver Datentyp ist und kein String --> Object)
@@ -24,6 +22,19 @@ public class RgbPM {
 
 
     // Getter und Setter
+
+
+    public String getTitle() {
+        return title.get();
+    }
+
+    public StringProperty titleProperty() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
 
     public int getRed() {
         return red.get();

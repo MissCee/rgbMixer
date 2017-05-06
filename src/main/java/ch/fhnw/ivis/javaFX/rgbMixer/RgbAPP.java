@@ -15,12 +15,12 @@ public class RgbAPP extends Application{
         Scene scene = new Scene(rootPanel);
 
         primaryStage.setScene(scene);
+        primaryStage.titleProperty().bind(pm.titleProperty());
         primaryStage.show();
-
-
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }
