@@ -51,7 +51,8 @@ public class RgbUI extends GridPane {
         blueNameLabel = new Label("Blue: ");
 
         colorRectangle = new Rectangle();
-        radii = new CornerRadii(20);
+        colorRectangle.setArcHeight(20);
+        colorRectangle.setArcWidth(20);
     }
 
     private void layoutControls() {
@@ -65,14 +66,14 @@ public class RgbUI extends GridPane {
         getColumnConstraints().addAll(cc);
 
         RowConstraints rc = new RowConstraints();
-        getRowConstraints().add(0, new RowConstraints(10));
-
+        getRowConstraints().addAll(rc);
 
         addRow(0, redNameLabel, redLabel, redSlider);
         addRow(1, greenNameLabel, greenLabel, greenSlider);
         addRow(2, blueNameLabel, blueLabel, blueSlider);
 
         add(colorRectangle, 0, 3, 2, 1);
+        addRow(4);
 
         //setGridLinesVisible(true);
     }
